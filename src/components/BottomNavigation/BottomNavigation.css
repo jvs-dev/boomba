@@ -1,0 +1,55 @@
+/* Bottom nav for mobile */
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 64px;
+  background: #fff;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 100;
+}
+
+.bn-btn {
+  background: transparent;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px;
+  cursor: pointer;
+  color: #777;
+  transition: color 0.2s ease;
+}
+
+.bn-btn:active {
+  color: var(--primary-color);
+}
+
+.bn-btn .icon {
+  font-size: 20px;
+}
+
+.bn-btn.active .icon {
+  color: var(--primary-color);
+}
+
+.bn-btn .label {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.bn-btn.active .label {
+  color: var(--primary-color);
+}
+
+/* Hide on desktop */
+@media (min-width: 900px) {
+  .bottom-nav {
+    display: none;
+  }
+}
