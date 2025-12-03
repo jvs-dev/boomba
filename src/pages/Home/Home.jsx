@@ -1,11 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Home.css";
 import BottomNavigation from "../../components/BottomNavigation/BottomNavigation";
+import SearchBar from "../../components/SearchBar/SearchBar";
 import EventCard from "./EventCard/EventCard";
 import Map from "./Map/Map";
+import PicoCard from "./Picos/PicoCard/PicoCard";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState("home");
+  const [carouselIndex, setCarouselIndex] = useState(0);
+
+  // Sample images for mini carousel (picos and festas)
+  const carouselImages = [
+    "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=60",
+    "https://d1csarkz8obe9u.cloudfront.net/posterpreviews/neon-party-social-media-banner-design-template-eda1ffbe1d8de107a8a958cf7566ace3_screen.jpg?ts=1611238442.png",
+    "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=800&q=60",
+    "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=800&q=60",
+    "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?auto=format&fit=crop&w=800&q=60",
+  ];
+
+  // Auto-rotate carousel every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCarouselIndex((prev) => (prev + 1) % carouselImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [carouselImages.length]);
 
   // Sample events for map testing
   const sampleEvents = [
@@ -47,6 +67,34 @@ export default function Home() {
     },
   ];
 
+  // Sample picos for the carousel
+  const samplePicos = [
+    {
+      id: 1,
+      name: "Pico do Sol",
+      location: "Itaparica, BA",
+      rating: 4.8,
+      image:
+        "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=800&q=60",
+    },
+    {
+      id: 2,
+      name: "Mirante Azul",
+      location: "Salvador, BA",
+      rating: 4.6,
+      image:
+        "https://images.unsplash.com/photo-1526772662000-3f88f10405ff?auto=format&fit=crop&w=800&q=60",
+    },
+    {
+      id: 3,
+      name: "Pedra Alta",
+      location: "Praia do Forte, BA",
+      rating: 4.9,
+      image:
+        "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=900&q=60",
+    },
+  ];
+
   return (
     <div className="home-page">
       <header className="top-header">
@@ -60,6 +108,7 @@ export default function Home() {
       </header>
 
       <main className="home-main">
+        <SearchBar />
         <div className="mobile-header">
           <div className="mobile-header__left">
             <h1 className="mobile-logo boombaTextGradient">BOOMBA</h1>
@@ -71,6 +120,43 @@ export default function Home() {
             <button className="icon-btn">
               <ion-icon name="notifications"></ion-icon>
             </button>
+          </div>
+        </div>
+
+        <div className="home__cta">
+          <div className="cta__text">
+            <h2 className="cta__title">
+              Encontre os melhores picos e festas da sua região!
+              <br />
+              Basta um clique para encontrar o rolê perfeito.
+            </h2>
+            <button className="cta__button">Explorar Agora</button>
+          </div>
+          <div className="cta__partys">
+            <div className="mini-carousel-wrapper">
+              <div className="mini-carousel-container">
+                {carouselImages.map((img, idx) => (
+                  <img
+                    key={idx}
+                    src={img}
+                    alt={`carousel-${idx}`}
+                    className={`carousel-image ${
+                      idx === carouselIndex ? "active" : ""
+                    }`}
+                  />
+                ))}
+              </div>
+              <div className="carousel-dots">
+                {carouselImages.map((_, idx) => (
+                  <button
+                    key={idx}
+                    className={`dot ${idx === carouselIndex ? "active" : ""}`}
+                    onClick={() => setCarouselIndex(idx)}
+                    aria-label={`Go to slide ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -88,7 +174,7 @@ export default function Home() {
                   <div className="ratting">
                     <ion-icon name="flame"></ion-icon>
                     4.7
-                  </div>                  
+                  </div>
                   <div className="card-body">
                     <h3>NEON V2!💜</h3>
                     <p>
@@ -280,6 +366,23 @@ export default function Home() {
         <section className="map-section">
           <h3 className="section-title">Festas por perto</h3>
           <Map events={sampleEvents} />
+        </section>
+
+        <section className="picos-section">
+          <h3 className="section-title">Picos mais visitados</h3>
+          <div className="picos-carousel">
+            <div className="picos-track">
+              {samplePicos.map((pico) => (
+                <PicoCard
+                  key={pico.id}
+                  image={pico.image}
+                  name={pico.name}
+                  location={pico.location}
+                  rating={pico.rating}
+                />
+              ))}
+            </div>
+          </div>
         </section>
 
         <section className="content"></section>

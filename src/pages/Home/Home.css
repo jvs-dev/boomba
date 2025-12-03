@@ -61,6 +61,110 @@
   gap: 12px;
 }
 
+.home__cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 20vh 28px;
+  text-align: center;
+}
+
+.cta__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  gap: 20px;
+  max-width: 100%;  
+}
+
+.cta__title {
+  font-family: var(--primary-font-family);
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.cta__button {
+  background: #5521cf;
+  border: none;
+  color: #fff;
+  padding: 14px 26px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cta__partys {
+  font-size: 14px;
+  color: #fff;
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 200px;
+}
+
+/* Mini Carousel Styles */
+.mini-carousel-wrapper {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.mini-carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  height: 280px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f0f0f0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.carousel-image.active {
+  opacity: 1;
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot.active {
+  background: #fff;
+  border-color: #fff;
+}
+
 .icon-btn {
   background: transparent;
   border: none;
@@ -263,7 +367,7 @@
   font-size: 20px;
   font-weight: 700;
   margin: 8px 0 12px;
-  padding: 0px 28px;
+  padding: 0px 28px 0px 28px;
 }
 
 .category-row {
@@ -281,6 +385,27 @@
 .map-section {
   margin-top: 30px;
   padding: 0px 28px;
+}
+
+/* Picos carousel styles */
+.picos-section {
+  margin-top: 18px;
+}
+.picos-carousel {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  margin: 0px 0px 0px 28px;
+}
+.picos-track {
+  display: flex;
+  gap: 12px;
+  padding: 8px 0 24px 0;
+  scroll-snap-type: x mandatory;
+}
+.picos-track .pico-card {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
 }
 
 /* Responsive: show header on larger screens */
